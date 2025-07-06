@@ -1,37 +1,34 @@
 import React from "react";
 
-export default function Restaurant({ template }) {
-  let name = template.name;
-  let dishes = template.menu.map((dish) => dish.name);
+export default function Restaurant({ restaurant }) {
+  const name = restaurant.name;
 
-  let dishList = (
+  const dishes = (
     <ul>
-      {dishes.map((item, index) => (
-        <li key={index}>{item}</li>
+      {restaurant.menu.map((dish) => (
+        <li key={dish.id}>{dish.name}</li>
       ))}
     </ul>
   );
 
-  let reviews = template.reviews.map((review) => review.text);
-
-  let reviewList = (
+  const reviews = (
     <ul>
-      {reviews.map((item, index) => (
-        <li key={index}>{item}</li>
+      {restaurant.reviews.map((review) => (
+        <li key={review.id}>{review.text}</li>
       ))}
     </ul>
   );
 
   return (
     <div>
-      <h1>{name}</h1>
+      <h2>{name}</h2>
       <div>
         <h3>Меню</h3>
-        {dishList}
+        {dishes}
       </div>
       <div>
         <h3>Отзывы</h3>
-        {reviewList}
+        {reviews}
       </div>
     </div>
   );

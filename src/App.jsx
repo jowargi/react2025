@@ -5,8 +5,8 @@ import { restaurants } from "../materials/mock";
 export default function App() {
   return (
     <div>
-      {restaurants.map((item, index) => (
-        <Restaurant key={index} template={item} />
+      {restaurants.map((restaurant) => (
+        <Restaurant key={restaurant.id} restaurant={restaurant} />
       ))}
     </div>
   );
