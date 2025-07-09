@@ -1,12 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 
-export default function Layout({
-  children,
-  header = <div>HEADER</div>,
-  footer = <div>FOOTER</div>,
-  sidebar = <div>SIDEBAR</div>,
-}) {
+export default function Layout({ children, header, footer, sidebar }) {
   return (
     <Fragment>
       <header>{header}</header>
