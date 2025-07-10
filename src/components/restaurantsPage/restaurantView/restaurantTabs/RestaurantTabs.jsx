@@ -1,9 +1,12 @@
-import React from "react";
 import RestaurantTab from "./restaurantTab/RestaurantTab";
 
 export default function RestaurantTabs({ restaurants, setActiveRestaurant }) {
   return (
-    <div onClick={partial(onClick, restaurants, setActiveRestaurant)}>
+    <div
+      onClick={function (event) {
+        return onClick.call(this, restaurants, setActiveRestaurant, event);
+      }}
+    >
       {restaurants.map((restaurant) => (
         <RestaurantTab key={restaurant.id} restaurant={restaurant} />
       ))}
@@ -23,10 +26,4 @@ function onClick(restaurants, setActiveRestaurant, event) {
   if (!restaurant) return;
 
   setActiveRestaurant(restaurant);
-}
-
-function partial(func, ...boundArgs) {
-  return function wrapper(...args) {
-    return func.call(this, ...boundArgs, ...args);
-  };
 }

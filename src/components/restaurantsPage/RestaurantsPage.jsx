@@ -1,4 +1,3 @@
-import React from "react";
 import RestaurantView from "./restaurantView/RestaurantView";
 
 export default function RestaurantsPage({ title, restaurants }) {

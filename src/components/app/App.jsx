@@ -1,4 +1,3 @@
-import React from "react";
 import RestaurantsPage from "../restaurantsPage/RestaurantsPage";
 import { restaurants } from "../../constants/mock";
 import Layout from "../layout/Layout";

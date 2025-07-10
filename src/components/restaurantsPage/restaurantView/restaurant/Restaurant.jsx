@@ -21,10 +21,10 @@ export default function Restaurant({ restaurant }) {
         {reviews?.length ? (
           <Reviews reviews={reviews} />
         ) : (
-          <Fragment>
+          <>
             <p>No reviews yet. Be the first!</p>
             <button>Leave feedback</button>
-          </Fragment>
+          </>
         )}
       </div>
     </div>
