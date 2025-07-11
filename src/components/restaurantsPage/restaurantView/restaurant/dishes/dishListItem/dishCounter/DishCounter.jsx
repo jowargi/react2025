@@ -1,13 +1,5 @@
-import { useState } from "react";
+import Counter from "../../../../../counter/Counter";
 
-export default function DishCounter({ minCount, maxCount }) {
-  const [count, setCount] = useState(minCount);
-
-  return (
-    <div>
-      <button onClick={() => count > minCount && setCount(count - 1)}>-</button>
-      <span>{count}</span>
-      <button onClick={() => count < maxCount && setCount(count + 1)}>+</button>
-    </div>
-  );
+export default function DishCounter({ minPortions = 0, maxPortions = 5 }) {
+  return <Counter min={minPortions} max={maxPortions} />;
 }
