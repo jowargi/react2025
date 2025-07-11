@@ -1,6 +1,10 @@
 import RestaurantTab from "./restaurantTab/RestaurantTab";
 
-export default function RestaurantTabs({ restaurants, setActiveRestaurant }) {
+export default function RestaurantTabs({
+  restaurants,
+  activeRestaurant,
+  setActiveRestaurant,
+}) {
   return (
     <div
       onClick={function (event) {
@@ -8,7 +12,11 @@ export default function RestaurantTabs({ restaurants, setActiveRestaurant }) {
       }}
     >
       {restaurants.map((restaurant) => (
-        <RestaurantTab key={restaurant.id} restaurant={restaurant} />
+        <RestaurantTab
+          key={restaurant.id}
+          restaurant={restaurant}
+          isDisabled={Object.is(restaurant.id, activeRestaurant.id)}
+        />
       ))}
     </div>
   );

@@ -1,3 +1,7 @@
-export default function RestaurantTab({ restaurant }) {
-  return <button data-restaurant-id={restaurant.id}>{restaurant.name}</button>;
+export default function RestaurantTab({ restaurant, isDisabled }) {
+  return (
+    <button data-restaurant-id={restaurant.id} disabled={isDisabled}>
+      {restaurant.name}
+    </button>
+  );
 }

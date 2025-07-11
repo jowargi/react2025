@@ -10,6 +10,7 @@ export default function RestaurantView({ restaurants }) {
     <>
       <RestaurantTabs
         restaurants={restaurants}
+        activeRestaurant={activeRestaurant}
         setActiveRestaurant={setActiveRestaurant}
       />
       <Restaurant restaurant={activeRestaurant} />
