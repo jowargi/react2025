@@ -13,7 +13,7 @@ export default function ReviewForm() {
     decrementRating,
     incrementRating,
     clear,
-  } = useReviewForm({ minRating: 1, maxRating: 5 });
+  } = useReviewForm();
 
   return (
     <form onSubmit={(event) => event.preventDefault()}>

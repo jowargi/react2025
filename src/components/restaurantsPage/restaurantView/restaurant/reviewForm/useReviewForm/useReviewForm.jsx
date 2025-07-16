@@ -29,10 +29,10 @@ const reducer = (formState, action) => {
       return { ...formState, review: action.payload };
 
     case DECREMENT_RATING_ACTION:
-      return { ...formState, rating: action.payload };
+      return { ...formState, rating: Math.max(formState.rating - 1, 1) };
 
     case INCREMENT_RATING_ACTION:
-      return { ...formState, rating: action.payload };
+      return { ...formState, rating: Math.min(formState.rating + 1, 5) };
 
     case CLEAR_ACTION:
       return { ...INITIAL_FORM_STATE };
@@ -42,7 +42,7 @@ const reducer = (formState, action) => {
   }
 };
 
-export function useReviewForm({ minRating, maxRating }) {
+export function useReviewForm() {
   const [formState, dispatch] = useReducer(reducer, INITIAL_FORM_STATE);
 
   const setName = useCallback(
@@ -61,21 +61,13 @@ export function useReviewForm({ minRating, maxRating }) {
   );
 
   const decrementRating = useCallback(
-    (rating) =>
-      dispatch({
-        type: DECREMENT_RATING_ACTION,
-        payload: Math.max(rating - 1, minRating),
-      }),
-    [minRating]
+    () => dispatch({ type: DECREMENT_RATING_ACTION }),
+    []
   );
 
   const incrementRating = useCallback(
-    (rating) =>
-      dispatch({
-        type: INCREMENT_RATING_ACTION,
-        payload: Math.min(rating + 1, maxRating),
-      }),
-    [maxRating]
+    () => dispatch({ type: INCREMENT_RATING_ACTION }),
+    []
   );
 
   const clear = useCallback(() => dispatch({ type: CLEAR_ACTION }), []);
