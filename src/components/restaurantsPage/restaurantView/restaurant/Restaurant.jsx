@@ -28,7 +28,7 @@ export default function Restaurant({ restaurant }) {
           </>
         )}
       </div>
-      <ReviewForm key={restaurant.id} />
+      <ReviewForm />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import Counter from "../../../../counter/Counter";
+import DishCounter from "./dishCounter/DishCounter";
 
 export default function DishListItem({
   dish,
@@ -8,7 +8,7 @@ export default function DishListItem({
   return (
     <li>
       <h4>{dish.name}</h4>
-      <Counter min={minPortions} max={maxPortions} />
+      <DishCounter minPortions={minPortions} maxPortions={maxPortions} />
     </li>
   );
 }

@@ -1,14 +1,18 @@
 import Counter from "../../../../counter/Counter";
 
 export default function RatingCounter({
-  minRating = 1,
-  maxRating = 5,
-  onRatingChange,
+  rating,
+  decrementRating,
+  incrementRating,
 }) {
   return (
     <div>
-      <p>Your rating of the restaurant:</p>
-      <Counter min={minRating} max={maxRating} onCountChange={onRatingChange} />
+      <p>Your current rating for the restaurant:</p>
+      <Counter
+        count={rating}
+        decrement={() => decrementRating(rating)}
+        increment={() => incrementRating(rating)}
+      />
     </div>
   );
 }
