@@ -29,9 +29,9 @@ export default function Counter({ count, decrement, increment }) {
   return (
     <div>
       <div>
-        <button onClick={() => decrement()}>-</button>
+        <button onClick={decrement}>-</button>
         <span>{count}</span>
-        <button onClick={() => increment()}>+</button>
+        <button onClick={increment}>+</button>
       </div>
       <div>
         <button onClick={startTimer}>start</button>

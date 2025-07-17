@@ -45,7 +45,7 @@ export default function ReviewForm() {
         decrementRating={decrementRating}
         incrementRating={incrementRating}
       />
-      <FormControls onClear={() => clear()} onSubmit={() => null} />
+      <FormControls onClear={clear} onSubmit={() => null} />
     </form>
   );
 }
