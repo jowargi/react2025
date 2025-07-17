@@ -1,13 +1,42 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-export default function Counter({ min, max }) {
-  let [count, setCount] = useState(min);
+export default function Counter({ count, decrement, increment }) {
+  const timerIdRef = useRef(null);
+
+  const startTimer = useCallback(() => {
+    if (!timerIdRef.current)
+      timerIdRef.current = setInterval(() => increment(), 1000);
+  }, [increment]);
+
+  const stopTimer = useCallback(() => {
+    if (timerIdRef.current) {
+      clearInterval(timerIdRef.current);
+
+      timerIdRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timerIdRef.current) {
+        clearInterval(timerIdRef.current);
+
+        timerIdRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div>
-      <button onClick={() => count > min && setCount(count - 1)}>-</button>
-      <span>{count}</span>
-      <button onClick={() => count < max && setCount(count + 1)}>+</button>
+      <div>
+        <button onClick={decrement}>-</button>
+        <span>{count}</span>
+        <button onClick={increment}>+</button>
+      </div>
+      <div>
+        <button onClick={startTimer}>start</button>
+        <button onClick={stopTimer}>stop</button>
+      </div>
     </div>
   );
 }

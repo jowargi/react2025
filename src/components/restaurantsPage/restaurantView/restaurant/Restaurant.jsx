@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Dishes from "./dishes/Dishes";
 import Reviews from "./reviews/Reviews";
+import ReviewForm from "./reviewForm/ReviewForm";
 
 export default function Restaurant({ restaurant }) {
   const { name, menu, reviews } = restaurant;
@@ -27,6 +28,7 @@ export default function Restaurant({ restaurant }) {
           </>
         )}
       </div>
+      <ReviewForm />
     </div>
   );
 }

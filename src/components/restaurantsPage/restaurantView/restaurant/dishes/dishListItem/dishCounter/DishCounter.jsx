@@ -1,5 +1,11 @@
 import Counter from "../../../../../counter/Counter";
+import { useCount } from "./useCounter";
 
-export default function DishCounter({ minPortions = 0, maxPortions = 5 }) {
-  return <Counter min={minPortions} max={maxPortions} />;
+export default function DishCounter({ minPortions, maxPortions }) {
+  const { count, decrement, increment } = useCount({
+    min: minPortions,
+    max: maxPortions,
+  });
+
+  return <Counter count={count} decrement={decrement} increment={increment} />;
 }

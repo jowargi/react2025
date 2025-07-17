@@ -13,7 +13,7 @@ export default function RestaurantView({ restaurants }) {
         activeRestaurant={activeRestaurant}
         setActiveRestaurant={setActiveRestaurant}
       />
-      <Restaurant restaurant={activeRestaurant} />
+      <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant} />
     </>
   );
 }

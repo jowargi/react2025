@@ -7,15 +7,15 @@ export default function RestaurantTabs({
 }) {
   return (
     <div
-      onClick={function (event) {
-        return onClick.call(this, restaurants, setActiveRestaurant, event);
+      onClick={(event) => {
+        return onClick(restaurants, setActiveRestaurant, event);
       }}
     >
       {restaurants.map((restaurant) => (
         <RestaurantTab
           key={restaurant.id}
           restaurant={restaurant}
-          isDisabled={Object.is(restaurant.id, activeRestaurant.id)}
+          isDisabled={restaurant.id === activeRestaurant.id}
         />
       ))}
     </div>
@@ -27,8 +27,8 @@ function onClick(restaurants, setActiveRestaurant, event) {
 
   if (!restaurantId) return;
 
-  const restaurant = restaurants.find((restaurant) =>
-    Object.is(restaurant.id, restaurantId)
+  const restaurant = restaurants.find(
+    (restaurant) => restaurant.id === restaurantId
   );
 
   if (!restaurant) return;
