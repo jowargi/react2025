@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import styles from "./ScrollProgressBar.module.css";
+import classNames from "classnames";
 
-export default function ScrollProgressBar() {
+export default function ScrollProgressBar({ themeColor = "light" }) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
+    const onProgress = () => {
       const totalHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
@@ -14,26 +16,22 @@ export default function ScrollProgressBar() {
       setScrollProgress(scrollProgress);
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onProgress);
+    window.addEventListener("resize", onProgress);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onProgress);
+      window.removeEventListener("resize", onProgress);
     };
   }, []);
 
   return (
     <div
-      style={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: `${scrollProgress}%`,
-        height: "4px",
-        backgroundColor: "red",
-        transitionProperty: "width",
-        transitionDuration: "10ms",
-        transitionTimingFunction: "ease-out",
-      }}
+      className={classNames(
+        styles["scroll-progress-bar"],
+        styles[`scroll-progress-bar--theme-color-${themeColor}`]
+      )}
+      style={{ width: `${scrollProgress}%` }}
     />
   );
 }

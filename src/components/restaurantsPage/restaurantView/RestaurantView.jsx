@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import RestaurantTabs from "./restaurantTabs/RestaurantTabs";
 import Restaurant from "./restaurant/Restaurant";
-import { Fragment } from "react";
 
-export default function RestaurantView({ restaurants }) {
+export default function RestaurantView({ restaurants, themeColor = "light" }) {
   const [activeRestaurant, setActiveRestaurant] = useState(restaurants[0]);
 
   return (
@@ -12,8 +11,13 @@ export default function RestaurantView({ restaurants }) {
         restaurants={restaurants}
         activeRestaurant={activeRestaurant}
         setActiveRestaurant={setActiveRestaurant}
+        themeColor={themeColor}
       />
-      <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant} />
+      <Restaurant
+        key={activeRestaurant.id}
+        restaurant={activeRestaurant}
+        themeColor={themeColor}
+      />
     </>
   );
 }
