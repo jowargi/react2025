@@ -1,0 +1,95 @@
+.restaurant {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 24px;
+}
+
+.menu-section,
+.reviews-section {
+  margin-bottom: 24px;
+}
+
+.empty-message {
+  margin: 8px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.review-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3a86ff;
+  color: white;
+  cursor: pointer;
+}
+
+.review-button:hover {
+  background: #2667cc;
+}
+
+.restaurant--theme-color-dark {
+  background-color: #2d2d2d;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.name--theme-color-dark {
+  color: #f5f5f5;
+}
+
+.empty-message--theme-color-dark {
+  color: #aaa;
+}
+
+.review-button--theme-color-dark {
+  background-color: #bb86fc;
+}
+
+.review-button--theme-color-dark:hover {
+  background-color: #9a67d6;
+}
+
+@media (max-width: 768px) {
+  .restaurant {
+    padding: 14px;
+  }
+
+  .name {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .menu-section,
+  .reviews-section {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .restaurant {
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  .name {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .menu-section,
+  .reviews-section {
+    margin-bottom: 16px;
+  }
+
+  .review-button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

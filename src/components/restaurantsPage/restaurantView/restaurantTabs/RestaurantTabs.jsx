@@ -1,21 +1,29 @@
 import RestaurantTab from "./restaurantTab/RestaurantTab";
+import styles from "./RestaurantTabs.module.css";
+import classNames from "classnames";
 
 export default function RestaurantTabs({
   restaurants,
   activeRestaurant,
   setActiveRestaurant,
+  themeColor = "light",
 }) {
   return (
     <div
       onClick={(event) => {
         return onClick(restaurants, setActiveRestaurant, event);
       }}
+      className={classNames(
+        styles["tabs-container"],
+        styles[`tabs-container--theme-color-${themeColor}`]
+      )}
     >
       {restaurants.map((restaurant) => (
         <RestaurantTab
           key={restaurant.id}
           restaurant={restaurant}
           isDisabled={restaurant.id === activeRestaurant.id}
+          themeColor={themeColor}
         />
       ))}
     </div>

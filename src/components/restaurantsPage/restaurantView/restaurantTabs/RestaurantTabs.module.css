@@ -1,0 +1,25 @@
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background-color: #f5f5f5;
+}
+
+.tabs-container--theme-color-dark {
+  background-color: #2d2d2d;
+}
+
+@media (max-width: 480px) {
+  .tabs-container {
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+
+  .tabs-container--theme-color-dark {
+    background-color: #2d2d2d;
+  }
+}
