@@ -3,9 +3,14 @@ import Reviews from "./reviews/Reviews";
 import ReviewForm from "./reviewForm/ReviewForm";
 import styles from "./Restaurant.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
+import { useUser } from "../../../userContextProvider/UserContextProvider";
 
-export default function Restaurant({ restaurant, themeColor = "light" }) {
+export default function Restaurant({ restaurant }) {
   const { name, menu, reviews } = restaurant;
+
+  const { themeColor } = useThemeColor();
+  const { user } = useUser();
 
   return (
     <div
@@ -25,12 +30,7 @@ export default function Restaurant({ restaurant, themeColor = "light" }) {
       <div className={styles["menu-section"]}>
         <h3>Menu</h3>
         {menu?.length ? (
-          <Dishes
-            menu={menu}
-            minPortions={0}
-            maxPortions={5}
-            themeColor={themeColor}
-          />
+          <Dishes menu={menu} minPortions={0} maxPortions={5} />
         ) : (
           <p
             className={classNames(
@@ -45,7 +45,7 @@ export default function Restaurant({ restaurant, themeColor = "light" }) {
       <div className={styles["reviews-section"]}>
         <h3>Reviews</h3>
         {reviews?.length ? (
-          <Reviews reviews={reviews} themeColor={themeColor} />
+          <Reviews reviews={reviews} />
         ) : (
           <>
             <p
@@ -67,7 +67,7 @@ export default function Restaurant({ restaurant, themeColor = "light" }) {
           </>
         )}
       </div>
-      <ReviewForm themeColor={themeColor} />
+      {user && <ReviewForm />}
     </div>
   );
 }

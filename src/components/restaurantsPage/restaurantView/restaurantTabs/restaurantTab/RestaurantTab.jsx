@@ -1,11 +1,10 @@
+import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./RestaurantTab.module.css";
 import classNames from "classnames";
 
-export default function RestaurantTab({
-  restaurant,
-  isDisabled,
-  themeColor = "light",
-}) {
+export default function RestaurantTab({ restaurant, isDisabled }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <button
       data-restaurant-id={restaurant.id}

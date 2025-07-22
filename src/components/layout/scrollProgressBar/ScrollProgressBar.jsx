@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./ScrollProgressBar.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../../themeColorContextProvider/ThemeColorContextProvider";
 
-export default function ScrollProgressBar({ themeColor = "light" }) {
+export default function ScrollProgressBar() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const { themeColor } = useThemeColor();
 
   useEffect(() => {
     const onProgress = () => {

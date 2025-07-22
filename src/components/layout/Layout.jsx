@@ -1,17 +1,16 @@
 import ScrollProgressBar from "./scrollProgressBar/ScrollProgressBar";
 import styles from "./Layout.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../themeColorContextProvider/ThemeColorContextProvider";
+import ThemeColorToggle from "./themeColorToggle/ThemeColorToggle";
 
-export default function Layout({
-  children,
-  header,
-  footer,
-  sidebar,
-  themeColor = "light",
-}) {
+export default function Layout({ children, header, footer, sidebar }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <>
-      <ScrollProgressBar themeColor={themeColor} />
+      <ScrollProgressBar />
+      <ThemeColorToggle />
       <div className={styles.layout}>
         <header
           className={classNames(

@@ -1,37 +1,10 @@
-import { useCallback, useEffect, useRef } from "react";
 import styles from "./Counter.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../../themeColorContextProvider/ThemeColorContextProvider";
+import CounterButton from "./counterButton/CounterButton";
 
-export default function Counter({
-  count,
-  decrement,
-  increment,
-  themeColor = "light",
-}) {
-  const timerIdRef = useRef(null);
-
-  const startTimer = useCallback(() => {
-    if (!timerIdRef.current)
-      timerIdRef.current = setInterval(() => increment(), 1000);
-  }, [increment]);
-
-  const stopTimer = useCallback(() => {
-    if (timerIdRef.current) {
-      clearInterval(timerIdRef.current);
-
-      timerIdRef.current = null;
-    }
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (timerIdRef.current) {
-        clearInterval(timerIdRef.current);
-
-        timerIdRef.current = null;
-      }
-    };
-  }, []);
+export default function Counter({ count, decrement, increment }) {
+  const { themeColor } = useThemeColor();
 
   return (
     <div
@@ -41,15 +14,7 @@ export default function Counter({
       )}
     >
       <div className={styles["count-controls"]}>
-        <button
-          onClick={decrement}
-          className={classNames(
-            styles.button,
-            styles[`button--theme-color-${themeColor}`]
-          )}
-        >
-          -
-        </button>
+        <CounterButton text="-" onClick={decrement} />
         <span
           className={classNames(
             styles.count,
@@ -58,37 +23,7 @@ export default function Counter({
         >
           {count}
         </span>
-        <button
-          onClick={increment}
-          className={classNames(
-            styles.button,
-            styles[`button--theme-color-${themeColor}`]
-          )}
-        >
-          +
-        </button>
-      </div>
-      <div className={styles["timer-controls"]} style={{ display: "none" }}>
-        <button
-          onClick={startTimer}
-          className={classNames(
-            styles.button,
-            styles[`button--theme-color-${themeColor}`],
-            styles["timer-button"]
-          )}
-        >
-          start
-        </button>
-        <button
-          onClick={stopTimer}
-          className={classNames(
-            styles.button,
-            styles[`button--theme-color-${themeColor}`],
-            styles["timer-button"]
-          )}
-        >
-          stop
-        </button>
+        <CounterButton text="+" onClick={increment} />
       </div>
     </div>
   );

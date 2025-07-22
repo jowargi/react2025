@@ -1,12 +1,11 @@
 import RestaurantView from "./restaurantView/RestaurantView";
 import styles from "./RestaurantsPage.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../themeColorContextProvider/ThemeColorContextProvider";
 
-export default function RestaurantsPage({
-  title,
-  restaurants,
-  themeColor = "light",
-}) {
+export default function RestaurantsPage({ title, restaurants }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <section
       className={classNames(
@@ -29,7 +28,7 @@ export default function RestaurantsPage({
         )}
       >
         {restaurants?.length ? (
-          <RestaurantView restaurants={restaurants} themeColor={themeColor} />
+          <RestaurantView restaurants={restaurants} />
         ) : (
           <p
             className={classNames(

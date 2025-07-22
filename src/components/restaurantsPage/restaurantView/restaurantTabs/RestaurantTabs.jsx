@@ -1,3 +1,4 @@
+import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
 import RestaurantTab from "./restaurantTab/RestaurantTab";
 import styles from "./RestaurantTabs.module.css";
 import classNames from "classnames";
@@ -6,8 +7,9 @@ export default function RestaurantTabs({
   restaurants,
   activeRestaurant,
   setActiveRestaurant,
-  themeColor = "light",
 }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <div
       onClick={(event) => {
@@ -23,7 +25,6 @@ export default function RestaurantTabs({
           key={restaurant.id}
           restaurant={restaurant}
           isDisabled={restaurant.id === activeRestaurant.id}
-          themeColor={themeColor}
         />
       ))}
     </div>

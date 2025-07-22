@@ -5,8 +5,9 @@ import RatingCounter from "./ratingCounter/RatingCounter";
 import FormControls from "./formControls/FormControls";
 import styles from "./ReviewForm.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
 
-export default function ReviewForm({ themeColor = "light" }) {
+export default function ReviewForm() {
   const {
     formState,
     setName,
@@ -16,6 +17,8 @@ export default function ReviewForm({ themeColor = "light" }) {
     incrementRating,
     clear,
   } = useReviewForm();
+
+  const { themeColor } = useThemeColor();
 
   return (
     <form
@@ -32,7 +35,6 @@ export default function ReviewForm({ themeColor = "light" }) {
         value={formState.name}
         onChange={(event) => setName(event.target.value)}
         labelText="Name"
-        themeColor={themeColor}
       />
       <InputField
         type="email"
@@ -41,7 +43,6 @@ export default function ReviewForm({ themeColor = "light" }) {
         value={formState.email}
         onChange={(event) => setEmail(event.target.value)}
         labelText="Email"
-        themeColor={themeColor}
       />
       <TextareaField
         id="review-text"
@@ -49,19 +50,13 @@ export default function ReviewForm({ themeColor = "light" }) {
         value={formState.review}
         onChange={(event) => setReview(event.target.value)}
         labelText="Review"
-        themeColor={themeColor}
       />
       <RatingCounter
         rating={formState.rating}
         decrementRating={decrementRating}
         incrementRating={incrementRating}
-        themeColor={themeColor}
       />
-      <FormControls
-        onClear={clear}
-        onSubmit={() => null}
-        themeColor={themeColor}
-      />
+      <FormControls onClear={clear} onSubmit={() => null} />
     </form>
   );
 }

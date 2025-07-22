@@ -1,3 +1,5 @@
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
+import { useUser } from "../../../../../userContextProvider/UserContextProvider";
 import DishCounter from "./dishCounter/DishCounter";
 import styles from "./DishListItem.module.css";
 import classNames from "classnames";
@@ -6,8 +8,10 @@ export default function DishListItem({
   dish,
   minPortions = 0,
   maxPortions = 5,
-  themeColor = "light",
 }) {
+  const { themeColor } = useThemeColor();
+  const { user } = useUser();
+
   return (
     <li
       className={classNames(
@@ -23,11 +27,9 @@ export default function DishListItem({
       >
         {dish.name}
       </h4>
-      <DishCounter
-        minPortions={minPortions}
-        maxPortions={maxPortions}
-        themeColor={themeColor}
-      />
+      {user && (
+        <DishCounter minPortions={minPortions} maxPortions={maxPortions} />
+      )}
     </li>
   );
 }

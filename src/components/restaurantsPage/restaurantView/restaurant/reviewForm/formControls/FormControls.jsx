@@ -1,11 +1,10 @@
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./FormControls.module.css";
 import classNames from "classnames";
 
-export default function FormControls({
-  onClear,
-  onSubmit,
-  themeColor = "light",
-}) {
+export default function FormControls({ onClear, onSubmit }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <div
       className={classNames(

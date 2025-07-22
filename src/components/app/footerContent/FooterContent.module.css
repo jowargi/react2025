@@ -1,0 +1,19 @@
+.footer-content {
+  padding: 16px;
+  background-color: #e8e8e8;
+  text-align: center;
+  font: 1rem/1.2 sans-serif;
+  color: #333;
+}
+
+.footer-content--theme-color-dark {
+  background-color: #3a3a3a;
+  color: #f0f0f0;
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
