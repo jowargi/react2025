@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 const ThemeColorContext = createContext({
   themeColor: "light",
@@ -13,8 +13,20 @@ export default function ThemeColorContextProvider({
 }) {
   const [themeColor, setThemeColor] = useState(initialThemeColor);
 
+  const setLightTheme = useCallback(
+    () => setThemeColor("light"),
+    [setThemeColor]
+  );
+
+  const setDarkTheme = useCallback(
+    () => setThemeColor("dark"),
+    [setThemeColor]
+  );
+
   return (
-    <ThemeColorContext.Provider value={{ themeColor, setThemeColor }}>
+    <ThemeColorContext.Provider
+      value={{ themeColor, setLightTheme, setDarkTheme }}
+    >
       {children}
     </ThemeColorContext.Provider>
   );

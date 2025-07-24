@@ -3,13 +3,13 @@ import styles from "./ThemeColorToggle.module.css";
 import classNames from "classnames";
 
 export default function ThemeColorToggle() {
-  const { themeColor, setThemeColor } = useThemeColor();
+  const { themeColor, setLightTheme, setDarkTheme } = useThemeColor();
 
   return (
     <button
-      onClick={() => {
-        setThemeColor(themeColor === "light" ? "dark" : "light");
-      }}
+      onClick={() =>
+        themeColor === "light" ? setDarkTheme() : setLightTheme()
+      }
       className={classNames(styles.toggle, styles[`toggle--${themeColor}`])}
     >
       {themeColor === "light" ? "☾" : themeColor === "dark" ? "☀" : "◑"}

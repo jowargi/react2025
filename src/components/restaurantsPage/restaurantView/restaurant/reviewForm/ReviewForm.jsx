@@ -6,6 +6,7 @@ import FormControls from "./formControls/FormControls";
 import styles from "./ReviewForm.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
+import { useUser } from "../../../../userContextProvider/UserContextProvider";
 
 export default function ReviewForm() {
   const {
@@ -18,7 +19,10 @@ export default function ReviewForm() {
     clear,
   } = useReviewForm();
 
+  const { user } = useUser();
   const { themeColor } = useThemeColor();
+
+  if (!user) return null;
 
   return (
     <form
