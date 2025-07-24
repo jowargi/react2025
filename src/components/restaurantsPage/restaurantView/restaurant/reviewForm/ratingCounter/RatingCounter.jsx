@@ -1,3 +1,4 @@
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
 import Counter from "../../../../counter/Counter";
 import styles from "./RatingCounter.module.css";
 import classNames from "classnames";
@@ -6,8 +7,9 @@ export default function RatingCounter({
   rating,
   decrementRating,
   incrementRating,
-  themeColor = "light",
 }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <div
       className={classNames(
@@ -27,7 +29,6 @@ export default function RatingCounter({
         count={rating}
         decrement={decrementRating}
         increment={incrementRating}
-        themeColor={themeColor}
       />
     </div>
   );

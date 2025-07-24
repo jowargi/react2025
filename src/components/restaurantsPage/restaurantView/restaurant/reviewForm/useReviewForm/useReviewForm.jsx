@@ -1,4 +1,5 @@
 import { useCallback, useReducer } from "react";
+import { useUser } from "../../../../../userContextProvider/UserContextProvider";
 
 const INITIAL_FORM_STATE = {
   name: "",
@@ -43,34 +44,47 @@ const reducer = (formState, action) => {
 };
 
 export function useReviewForm() {
+  const { user } = useUser();
   const [formState, dispatch] = useReducer(reducer, INITIAL_FORM_STATE);
 
+  const safeDispatch = useCallback(
+    (action) => {
+      if (!user) return;
+
+      dispatch(action);
+    },
+    [user, dispatch]
+  );
+
   const setName = useCallback(
-    (name) => dispatch({ type: SET_NAME_ACTION, payload: name }),
-    []
+    (name) => safeDispatch({ type: SET_NAME_ACTION, payload: name }),
+    [safeDispatch]
   );
 
   const setEmail = useCallback(
-    (email) => dispatch({ type: SET_EMAIL_ACTION, payload: email }),
-    []
+    (email) => safeDispatch({ type: SET_EMAIL_ACTION, payload: email }),
+    [safeDispatch]
   );
 
   const setReview = useCallback(
-    (review) => dispatch({ type: SET_REVIEW_ACTION, payload: review }),
-    []
+    (review) => safeDispatch({ type: SET_REVIEW_ACTION, payload: review }),
+    [safeDispatch]
   );
 
   const decrementRating = useCallback(
-    () => dispatch({ type: DECREMENT_RATING_ACTION }),
-    []
+    () => safeDispatch({ type: DECREMENT_RATING_ACTION }),
+    [safeDispatch]
   );
 
   const incrementRating = useCallback(
-    () => dispatch({ type: INCREMENT_RATING_ACTION }),
-    []
+    () => safeDispatch({ type: INCREMENT_RATING_ACTION }),
+    [safeDispatch]
   );
 
-  const clear = useCallback(() => dispatch({ type: CLEAR_ACTION }), []);
+  const clear = useCallback(
+    () => safeDispatch({ type: CLEAR_ACTION }),
+    [safeDispatch]
+  );
 
   return {
     formState,

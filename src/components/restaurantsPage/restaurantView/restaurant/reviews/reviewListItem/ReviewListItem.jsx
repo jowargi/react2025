@@ -1,7 +1,10 @@
 import styles from "./ReviewListItem.module.css";
 import classNames from "classnames";
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
 
-export default function ReviewListItem({ review, themeColor = "light" }) {
+export default function ReviewListItem({ review }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <li
       className={classNames(

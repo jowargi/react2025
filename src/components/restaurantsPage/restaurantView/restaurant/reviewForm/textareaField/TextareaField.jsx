@@ -1,3 +1,4 @@
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./TextareaField.module.css";
 import classNames from "classnames";
 
@@ -7,8 +8,9 @@ export default function TextareaField({
   value,
   onChange,
   labelText,
-  themeColor = "light",
 }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <div className={styles["textarea-field"]}>
       <label

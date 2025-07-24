@@ -1,3 +1,4 @@
+import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./InputField.module.css";
 import classNames from "classnames";
 
@@ -8,8 +9,9 @@ export default function InputField({
   value,
   onChange,
   labelText,
-  themeColor = "light",
 }) {
+  const { themeColor } = useThemeColor();
+
   return (
     <div className={styles["input-field"]}>
       <label

@@ -1,0 +1,36 @@
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.header-content {
+  padding: 16px;
+  background-color: #e8e8e8;
+}
+
+.title {
+  float: left;
+  width: calc(100% - 250px);
+  font: bold 1rem/1.2 sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+.header-content--theme-color-dark {
+  background-color: #2d2d2d;
+}
+
+.title--theme-color-dark {
+  color: #f5f5f5;
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+}

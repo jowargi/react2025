@@ -1,12 +1,7 @@
 import DishListItem from "./dishListItem/DishListItem";
 import styles from "./Dishes.module.css";
 
-export default function Dishes({
-  menu,
-  minPortions,
-  maxPortions,
-  themeColor = "light",
-}) {
+export default function Dishes({ menu, minPortions, maxPortions }) {
   return (
     <ul className={styles["menu-list"]}>
       {menu.map((dish) => (
@@ -15,7 +10,6 @@ export default function Dishes({
           dish={dish}
           minPortions={minPortions}
           maxPortions={maxPortions}
-          themeColor={themeColor}
         />
       ))}
     </ul>

@@ -1,0 +1,36 @@
+.toggle {
+  position: fixed;
+  left: 5px;
+  bottom: 5px;
+  z-index: 1000;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: transparent;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 34px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle--light {
+  border-color: #333;
+  color: #333;
+}
+
+.toggle--light:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.toggle--dark {
+  border-color: #fff;
+  color: #fff;
+}
+
+.toggle--dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
