@@ -6,9 +6,7 @@ import classNames from "classnames";
 import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
 import { useUser } from "../../../userContextProvider/UserContextProvider";
 
-export default function Restaurant({ restaurant }) {
-  const { name, menu, reviews } = restaurant;
-
+export default function Restaurant({ name, menuIds, reviewsIds }) {
   const { themeColor } = useThemeColor();
   const { user } = useUser();
 
@@ -29,8 +27,8 @@ export default function Restaurant({ restaurant }) {
       </h2>
       <div className={styles["menu-section"]}>
         <h3>Menu</h3>
-        {menu?.length ? (
-          <Dishes menu={menu} minPortions={0} maxPortions={5} />
+        {menuIds?.length ? (
+          <Dishes menuIds={menuIds} />
         ) : (
           <p
             className={classNames(
@@ -44,8 +42,8 @@ export default function Restaurant({ restaurant }) {
       </div>
       <div className={styles["reviews-section"]}>
         <h3>Reviews</h3>
-        {reviews?.length ? (
-          <Reviews reviews={reviews} />
+        {reviewsIds?.length ? (
+          <Reviews reviewsIds={reviewsIds} />
         ) : (
           <>
             <p

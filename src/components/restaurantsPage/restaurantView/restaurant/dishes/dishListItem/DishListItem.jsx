@@ -4,11 +4,7 @@ import DishCounter from "./dishCounter/DishCounter";
 import styles from "./DishListItem.module.css";
 import classNames from "classnames";
 
-export default function DishListItem({
-  dish,
-  minPortions = 0,
-  maxPortions = 5,
-}) {
+export default function DishListItem({ id, name }) {
   const { themeColor } = useThemeColor();
   const { user } = useUser();
 
@@ -25,11 +21,9 @@ export default function DishListItem({
           styles[`dish-name--theme-color-${themeColor}`]
         )}
       >
-        {dish.name}
+        {name}
       </h4>
-      {user && (
-        <DishCounter minPortions={minPortions} maxPortions={maxPortions} />
-      )}
+      {user && <DishCounter dishId={id} />}
     </li>
   );
 }

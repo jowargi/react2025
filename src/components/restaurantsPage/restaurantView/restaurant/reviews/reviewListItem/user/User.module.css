@@ -1,0 +1,17 @@
+.user {
+  padding: 0.25rem 0;
+  line-height: 1.4;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.user--theme-color-light {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.user--theme-color-dark {
+  color: #e2e8f0;
+  font-weight: 600;
+}

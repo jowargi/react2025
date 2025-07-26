@@ -1,11 +1,12 @@
 import ReviewListItem from "./reviewListItem/ReviewListItem";
+import ReviewListItemContainer from "./reviewListItem/ReviewListItemContainer";
 import styles from "./Reviews.module.css";
 
-export default function Reviews({ reviews }) {
+export default function Reviews({ reviewsIds }) {
   return (
     <ul className={styles["reviews-list"]}>
-      {reviews.map((review) => (
-        <ReviewListItem key={review.id} review={review} />
+      {reviewsIds.map((reviewId) => (
+        <ReviewListItemContainer key={reviewId} reviewId={reviewId} />
       ))}
     </ul>
   );

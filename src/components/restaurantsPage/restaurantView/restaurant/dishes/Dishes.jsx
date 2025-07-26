@@ -1,16 +1,12 @@
 import DishListItem from "./dishListItem/DishListItem";
 import styles from "./Dishes.module.css";
+import DishListItemContainer from "./dishListItem/DishListItemContainer";
 
-export default function Dishes({ menu, minPortions, maxPortions }) {
+export default function Dishes({ menuIds }) {
   return (
     <ul className={styles["menu-list"]}>
-      {menu.map((dish) => (
-        <DishListItem
-          key={dish.id}
-          dish={dish}
-          minPortions={minPortions}
-          maxPortions={maxPortions}
-        />
+      {menuIds.map((dishId) => (
+        <DishListItemContainer key={dishId} dishId={dishId} />
       ))}
     </ul>
   );
