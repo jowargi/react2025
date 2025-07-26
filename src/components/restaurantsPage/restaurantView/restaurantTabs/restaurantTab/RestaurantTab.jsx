@@ -2,12 +2,12 @@ import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorC
 import styles from "./RestaurantTab.module.css";
 import classNames from "classnames";
 
-export default function RestaurantTab({ restaurant, isDisabled }) {
+export default function RestaurantTab({ id, name, isDisabled }) {
   const { themeColor } = useThemeColor();
 
   return (
     <button
-      data-restaurant-id={restaurant.id}
+      data-restaurant-id={id}
       disabled={isDisabled}
       className={classNames(
         styles.tab,
@@ -18,7 +18,7 @@ export default function RestaurantTab({ restaurant, isDisabled }) {
         }
       )}
     >
-      {restaurant.name}
+      {name}
     </button>
   );
 }

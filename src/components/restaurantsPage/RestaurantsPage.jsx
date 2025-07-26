@@ -3,7 +3,7 @@ import styles from "./RestaurantsPage.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../themeColorContextProvider/ThemeColorContextProvider";
 
-export default function RestaurantsPage({ title, restaurants }) {
+export default function RestaurantsPage({ title, restaurantsIds }) {
   const { themeColor } = useThemeColor();
 
   return (
@@ -27,8 +27,8 @@ export default function RestaurantsPage({ title, restaurants }) {
           styles[`content--theme-color-${themeColor}`]
         )}
       >
-        {restaurants?.length ? (
-          <RestaurantView restaurants={restaurants} />
+        {restaurantsIds?.length ? (
+          <RestaurantView restaurantsIds={restaurantsIds} />
         ) : (
           <p
             className={classNames(

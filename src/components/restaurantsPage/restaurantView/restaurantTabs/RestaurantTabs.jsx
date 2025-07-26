@@ -1,46 +1,44 @@
+import { useCallback } from "react";
 import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
-import RestaurantTab from "./restaurantTab/RestaurantTab";
+import RestaurantTabContainer from "./restaurantTab/RestaurantTabContainer";
 import styles from "./RestaurantTabs.module.css";
 import classNames from "classnames";
 
 export default function RestaurantTabs({
-  restaurants,
-  activeRestaurant,
-  setActiveRestaurant,
+  restaurantsIds,
+  activeRestaurantId,
+  setActiveRestaurantId,
 }) {
   const { themeColor } = useThemeColor();
 
+  const onClick = useCallback(
+    (event) => {
+      const restaurantId = event.target.dataset.restaurantId;
+
+      if (!restaurantId) return;
+
+      if (!restaurantsIds.includes(restaurantId)) return;
+
+      setActiveRestaurantId(restaurantId);
+    },
+    [restaurantsIds, setActiveRestaurantId]
+  );
+
   return (
     <div
-      onClick={(event) => {
-        return onClick(restaurants, setActiveRestaurant, event);
-      }}
+      onClick={onClick}
       className={classNames(
         styles["tabs-container"],
         styles[`tabs-container--theme-color-${themeColor}`]
       )}
     >
-      {restaurants.map((restaurant) => (
-        <RestaurantTab
-          key={restaurant.id}
-          restaurant={restaurant}
-          isDisabled={restaurant.id === activeRestaurant.id}
+      {restaurantsIds.map((restaurantId) => (
+        <RestaurantTabContainer
+          key={restaurantId}
+          restaurantId={restaurantId}
+          isDisabled={restaurantId === activeRestaurantId}
         />
       ))}
     </div>
   );
-}
-
-function onClick(restaurants, setActiveRestaurant, event) {
-  const restaurantId = event.target.dataset.restaurantId;
-
-  if (!restaurantId) return;
-
-  const restaurant = restaurants.find(
-    (restaurant) => restaurant.id === restaurantId
-  );
-
-  if (!restaurant) return;
-
-  setActiveRestaurant(restaurant);
 }

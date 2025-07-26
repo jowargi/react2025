@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import RestaurantTabs from "./restaurantTabs/RestaurantTabs";
-import Restaurant from "./restaurant/Restaurant";
+import RestaurantContainer from "./restaurant/RestaurantContainer";
 
-export default function RestaurantView({ restaurants }) {
-  const [activeRestaurant, setActiveRestaurant] = useState(restaurants[0]);
+export default function RestaurantView({ restaurantsIds }) {
+  const [activeRestaurantId, setActiveRestaurantId] = useState(
+    restaurantsIds[0]
+  );
 
   return (
     <>
       <RestaurantTabs
-        restaurants={restaurants}
-        activeRestaurant={activeRestaurant}
-        setActiveRestaurant={setActiveRestaurant}
+        restaurantsIds={restaurantsIds}
+        activeRestaurantId={activeRestaurantId}
+        setActiveRestaurantId={setActiveRestaurantId}
       />
-      <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant} />
+      <RestaurantContainer
+        key={activeRestaurantId}
+        restaurantId={activeRestaurantId}
+      />
     </>
   );
 }

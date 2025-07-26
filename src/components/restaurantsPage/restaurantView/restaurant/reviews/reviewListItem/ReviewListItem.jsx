@@ -1,8 +1,9 @@
 import styles from "./ReviewListItem.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeColorContextProvider";
+import UserContainer from "./user/UserContainer";
 
-export default function ReviewListItem({ review }) {
+export default function ReviewListItem({ userId, text }) {
   const { themeColor } = useThemeColor();
 
   return (
@@ -12,13 +13,14 @@ export default function ReviewListItem({ review }) {
         styles[`review-item--theme-color-${themeColor}`]
       )}
     >
+      <UserContainer id={userId} />
       <p
         className={classNames(
           styles["review-text"],
           styles[`review-text--theme-color-${themeColor}`]
         )}
       >
-        {review.text}
+        {text}
       </p>
     </li>
   );
