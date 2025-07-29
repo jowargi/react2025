@@ -9,7 +9,5 @@ export default function CartContainer() {
 
   if (!user) return null;
 
-  if (!itemsIds.length) return null;
-
   return <Cart itemsIds={itemsIds} />;
 }

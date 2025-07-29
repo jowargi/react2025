@@ -1,0 +1,51 @@
+.reviews-section {
+  margin-bottom: 24px;
+}
+
+.empty-message {
+  margin: 8px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.empty-message--theme-color-dark {
+  color: #aaa;
+}
+
+.review-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3a86ff;
+  color: white;
+  cursor: pointer;
+}
+
+.review-button:hover {
+  background: #2667cc;
+}
+
+.review-button--theme-color-dark {
+  background-color: #bb86fc;
+}
+
+.review-button--theme-color-dark:hover {
+  background-color: #9a67d6;
+}
+
+@media (max-width: 768px) {
+  .reviews-section {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-section {
+    margin-bottom: 16px;
+  }
+
+  .review-button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

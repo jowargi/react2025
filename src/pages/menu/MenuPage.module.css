@@ -1,0 +1,25 @@
+.menu-section {
+  margin-bottom: 24px;
+}
+
+.empty-message {
+  margin: 8px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.empty-message--theme-color-dark {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .menu-section {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-section {
+    margin-bottom: 16px;
+  }
+}

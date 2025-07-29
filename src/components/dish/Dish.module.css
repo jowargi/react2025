@@ -1,0 +1,103 @@
+.dish {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish--theme-color-light {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+.dish--theme-color-dark {
+  background-color: #3a3a3a;
+  border: 1px solid #444;
+}
+
+.name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.name--theme-color-light {
+  color: #333;
+}
+
+.name--theme-color-dark {
+  color: #fff;
+}
+
+.price {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.price--theme-color-light {
+  color: #4a5568;
+}
+
+.price--theme-color-dark {
+  color: #cbd5e0;
+}
+
+.ingredients {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.ingredients--theme-color-light {
+  background-color: #f8f9fa;
+  color: #4a5568;
+}
+
+.ingredients--theme-color-dark {
+  background-color: #3a3a3a;
+  color: #e2e8f0;
+}
+
+.link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.link--theme-color-light {
+  background-color: #edf2f7;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+}
+
+.link--theme-color-light:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.link--theme-color-dark {
+  background-color: #4a5568;
+  color: #f7fafc;
+  border: 1px solid #718096;
+}
+
+.link--theme-color-dark:hover {
+  background-color: #2d3748;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .link {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+  }
+}

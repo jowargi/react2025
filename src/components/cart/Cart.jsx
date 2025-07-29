@@ -13,21 +13,32 @@ export default function Cart({ itemsIds }) {
         styles[`cart--theme-color-${themeColor}`]
       )}
     >
-      <h3
+      <h2
         className={classNames(
           styles.title,
           styles[`title--theme-color-${themeColor}`]
         )}
       >
         Cart
-      </h3>
-      <ul className={styles.list}>
-        {itemsIds.map((itemId) => (
-          <li key={itemId}>
-            <CartItemContainer id={itemId} />
-          </li>
-        ))}
-      </ul>
+      </h2>
+      {itemsIds?.length ? (
+        <ul className={styles.list}>
+          {itemsIds.map((itemId) => (
+            <li key={itemId}>
+              <CartItemContainer id={itemId} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p
+          className={classNames(
+            styles["empty-message"],
+            styles[`empty-message--theme-color-${themeColor}`]
+          )}
+        >
+          It's empty here for now!
+        </p>
+      )}
     </section>
   );
 }

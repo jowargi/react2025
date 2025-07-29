@@ -12,7 +12,22 @@ export default function FooterContent() {
         styles[`footer-content--theme-color-${themeColor}`]
       )}
     >
-      FOOTER
+      <p
+        className={classNames(
+          styles.copyright,
+          styles[`copyright--theme-color-${themeColor}`]
+        )}
+      >
+        Copyright © 2025 Restaurant App
+      </p>
+      <address
+        className={classNames(
+          styles.address,
+          styles[`address--theme-color-${themeColor}`]
+        )}
+      >
+        New York, USA
+      </address>
     </div>
   );
 }

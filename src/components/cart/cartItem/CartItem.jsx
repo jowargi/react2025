@@ -1,10 +1,12 @@
-import DishCounter from "../../restaurantsPage/restaurantView/restaurant/dishes/dishListItem/dishCounter/DishCounter";
+import DishCounter from "../../dish/dishCounter/DishCounter";
 import { useThemeColor } from "../../themeColorContextProvider/ThemeColorContextProvider";
+import { useUser } from "../../userContextProvider/UserContextProvider";
 import styles from "./CartItem.module.css";
 import classNames from "classnames";
 
 export default function CartItem({ dishId, dishName, amount }) {
   const { themeColor } = useThemeColor();
+  const { user } = useUser();
 
   return (
     <div
@@ -21,7 +23,7 @@ export default function CartItem({ dishId, dishName, amount }) {
       >
         <p className={styles.name}>{dishName}</p>
         <p className={styles.amount}>Quantity: {amount}</p>
-        <DishCounter dishId={dishId} />
+        {user && <DishCounter dishId={dishId} />}
       </div>
     </div>
   );
