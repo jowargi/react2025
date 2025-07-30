@@ -1,13 +1,11 @@
 import { useThemeColor } from "../../components/themeColorContextProvider/ThemeColorContextProvider";
+import { Link } from "react-router-dom";
+import { homePageContent } from "../../../materials/home-content";
 import styles from "./HomePage.module.css";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { selectHomePageContent } from "../../redux/features/home/slice";
-import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { themeColor } = useThemeColor();
-  const homePageContent = useSelector(selectHomePageContent);
 
   const { title, description, linkText } = homePageContent || {};
 

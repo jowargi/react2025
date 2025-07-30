@@ -1,4 +1,4 @@
-import Link from "../../../../link/Link";
+import { NavLink } from "react-router-dom";
 import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./RestaurantTab.module.css";
 import classNames from "classnames";
@@ -7,7 +7,7 @@ export default function RestaurantTab({ id, name }) {
   const { themeColor } = useThemeColor();
 
   return (
-    <Link
+    <NavLink
       to={`/restaurants/${id}`}
       className={({ isActive }) =>
         classNames(styles.tab, styles[`tab--theme-color-${themeColor}`], {
@@ -17,6 +17,6 @@ export default function RestaurantTab({ id, name }) {
       }
     >
       {name}
-    </Link>
+    </NavLink>
   );
 }
