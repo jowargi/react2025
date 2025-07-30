@@ -10,9 +10,27 @@
   color: #f0f0f0;
 }
 
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.links--theme-color-light {
+  color: #333;
+}
+
+.links--theme-color-dark {
+  color: #f0f0f0;
+}
+
 @media (max-width: 480px) {
   .sidebar-content {
     padding: 12px;
     font-size: 0.9rem;
+  }
+
+  .links {
+    gap: 8px;
   }
 }

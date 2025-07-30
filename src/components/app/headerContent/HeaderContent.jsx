@@ -14,14 +14,14 @@ export default function HeaderContent() {
       )}
     >
       <AuthStatusControl />
-      <h2
+      <h1
         className={classNames(
           styles.title,
           styles[`title--theme-color-${themeColor}`]
         )}
       >
-        HEADER
-      </h2>
+        Restaurant App
+      </h1>
     </div>
   );
 }

@@ -3,8 +3,12 @@ import styles from "./Layout.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../themeColorContextProvider/ThemeColorContextProvider";
 import ThemeColorToggle from "./themeColorToggle/ThemeColorToggle";
+import { Outlet } from "react-router-dom";
+import HeaderContent from "../app/headerContent/HeaderContent";
+import FooterContent from "../app/footerContent/FooterContent";
+import SidebarContent from "../app/sidebarContent/SidebarContent";
 
-export default function Layout({ children, header, footer, sidebar }) {
+export default function Layout() {
   const { themeColor } = useThemeColor();
 
   return (
@@ -18,7 +22,7 @@ export default function Layout({ children, header, footer, sidebar }) {
             styles[`header--theme-color-${themeColor}`]
           )}
         >
-          {header}
+          <HeaderContent />
         </header>
         <main
           className={classNames(
@@ -26,7 +30,7 @@ export default function Layout({ children, header, footer, sidebar }) {
             styles[`main--theme-color-${themeColor}`]
           )}
         >
-          {children}
+          <Outlet />
         </main>
         <footer
           className={classNames(
@@ -34,7 +38,7 @@ export default function Layout({ children, header, footer, sidebar }) {
             styles[`footer--theme-color-${themeColor}`]
           )}
         >
-          {footer}
+          <FooterContent />
         </footer>
       </div>
       <aside
@@ -43,7 +47,7 @@ export default function Layout({ children, header, footer, sidebar }) {
           styles[`sidebar--theme-color-${themeColor}`]
         )}
       >
-        {sidebar}
+        <SidebarContent />
       </aside>
     </>
   );
