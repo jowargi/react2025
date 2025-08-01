@@ -3,7 +3,7 @@ import { normalizedDishes } from "../../../../materials/normalized-mock";
 
 const initialState = {
   ids: normalizedDishes.map((dish) => dish.id),
-  dishes: normalizedDishes.reduce((dishes, dish) => {
+  entities: normalizedDishes.reduce((dishes, dish) => {
     dishes[dish.id] = dish;
 
     return dishes;
@@ -16,7 +16,7 @@ export const dishesSlice = createSlice({
 
   selectors: {
     selectDishesIds: (state) => state.ids,
-    selectDishById: (state, id) => state.dishes[id],
+    selectDishById: (state, id) => state.entities[id],
   },
 });
 

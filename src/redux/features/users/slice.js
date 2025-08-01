@@ -3,7 +3,7 @@ import { normalizedUsers } from "../../../../materials/normalized-mock";
 
 const initialState = {
   ids: normalizedUsers.map((user) => user.id),
-  users: normalizedUsers.reduce((users, user) => {
+  entities: normalizedUsers.reduce((users, user) => {
     users[user.id] = user;
 
     return users;
@@ -16,7 +16,7 @@ export const usersSlice = createSlice({
 
   selectors: {
     selectUsersIds: (state) => state.ids,
-    selectUserById: (state, id) => state.users[id],
+    selectUserById: (state, id) => state.entities[id],
   },
 });
 
