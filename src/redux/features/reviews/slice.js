@@ -4,7 +4,7 @@ import Reviews from "../../../components/restaurants/restaurantView/restaurant/r
 
 const initialState = {
   ids: normalizedReviews.map((review) => review.id),
-  reviews: normalizedReviews.reduce((reviews, review) => {
+  entities: normalizedReviews.reduce((reviews, review) => {
     reviews[review.id] = review;
 
     return reviews;
@@ -17,7 +17,7 @@ export const reviewsSlice = createSlice({
 
   selectors: {
     selectReviewsIds: (state) => state.ids,
-    selectReviewById: (state, id) => state.reviews[id],
+    selectReviewById: (state, id) => state.entities[id],
   },
 });
 
