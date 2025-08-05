@@ -1,6 +1,6 @@
 import { useThemeColor } from "../../components/themeColorContextProvider/ThemeColorContextProvider";
 import { Link } from "react-router-dom";
-import { homePageContent } from "../../../materials/home-content";
+import { homePageContent } from "../../constants/home-content";
 import styles from "./HomePage.module.css";
 import classNames from "classnames";
 

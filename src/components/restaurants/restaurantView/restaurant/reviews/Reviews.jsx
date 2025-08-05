@@ -1,13 +1,16 @@
 import ReviewListItem from "./reviewListItem/ReviewListItem";
-import ReviewListItemContainer from "./reviewListItem/ReviewListItemContainer";
 import styles from "./Reviews.module.css";
 
-export default function Reviews({ reviewsIds }) {
+export default function Reviews({ reviews }) {
   return (
     <ul className={styles["reviews-list"]}>
-      {reviewsIds.map((reviewId) => (
-        <ReviewListItemContainer key={reviewId} reviewId={reviewId} />
-      ))}
+      {reviews.map((review) => {
+        const { id, userId, text } = review || {};
+
+        return id && userId && text ? (
+          <ReviewListItem key={id} userId={userId} text={text} />
+        ) : null;
+      })}
     </ul>
   );
 }

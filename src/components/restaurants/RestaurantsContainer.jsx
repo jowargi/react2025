@@ -5,5 +5,7 @@ import { selectRestaurantsIds } from "../../redux/features/restaurants/slice";
 export default function RestaurantsContainer() {
   const restaurantsIds = useSelector(selectRestaurantsIds);
 
-  return <Restaurants restaurantsIds={restaurantsIds} />;
+  return restaurantsIds?.length ? (
+    <Restaurants restaurantsIds={restaurantsIds} />
+  ) : null;
 }
