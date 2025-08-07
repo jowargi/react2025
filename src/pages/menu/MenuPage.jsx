@@ -5,18 +5,16 @@ import { useThemeColor } from "../../components/themeColorContextProvider/ThemeC
 import styles from "./MenuPage.module.css";
 import classNames from "classnames";
 import {
-  selectDishesByRestaurantId,
-  selectDishesErrorByRestaurantId,
-} from "../../redux/features/restaurantDishes/slice";
-import { useRequest } from "../../redux/hooks/useRequest";
-import { getDishesByRestaurantId } from "../../redux/features/restaurantDishes/getDishesByRestaurantId";
-import {
   REQUEST_STATUS_IDLE,
   REQUEST_STATUS_PENDING,
   REQUEST_STATUS_REJECTED,
 } from "../../redux/constants";
 import MenuPageSkeleton from "../../components/skeletons/menuPage/MenuPageSkeleton";
 import ErrorAlert from "../../components/errorAlert/ErrorAlert";
+import { selectRestaurantById } from "../../redux/features/restaurants/slice";
+import { useRequest } from "../../redux/hooks/useRequest";
+import { getDishesByRestaurantId } from "../../redux/features/dishes/getDishesByRestaurantId";
+import { selectRestaurantDishesError } from "../../redux/features/dishes/slice";
 
 export default function MenuPage() {
   const { themeColor } = useThemeColor();
@@ -24,11 +22,11 @@ export default function MenuPage() {
 
   const requestStatus = useRequest(getDishesByRestaurantId, restaurantId);
 
-  const dishes = useSelector((state) =>
-    selectDishesByRestaurantId(state, restaurantId)
+  const restaurant = useSelector((state) =>
+    selectRestaurantById(state, restaurantId)
   );
-  const dishesError = useSelector((state) =>
-    selectDishesErrorByRestaurantId(state, restaurantId)
+  const restaurantDishesError = useSelector((state) =>
+    selectRestaurantDishesError(state, restaurantId)
   );
 
   if (requestStatus === REQUEST_STATUS_IDLE) return null;
@@ -37,15 +35,22 @@ export default function MenuPage() {
 
   if (
     requestStatus === REQUEST_STATUS_REJECTED &&
-    dishesError?.name !== "ConditionError"
+    restaurantDishesError?.name !== "ConditionError"
   )
-    return <ErrorAlert name={dishesError.name} message={dishesError.message} />;
+    return (
+      <ErrorAlert
+        name={restaurantDishesError.name}
+        message={restaurantDishesError.message}
+      />
+    );
+
+  const { menu } = restaurant || {};
 
   return (
     <div className={styles["menu-section"]}>
       <h3>Menu</h3>
-      {dishes?.length ? (
-        <Dishes dishes={dishes} />
+      {menu?.length ? (
+        <Dishes dishesIds={menu} />
       ) : (
         <p
           className={classNames(

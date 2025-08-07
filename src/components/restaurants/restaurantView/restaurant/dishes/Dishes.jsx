@@ -1,16 +1,12 @@
 import styles from "./Dishes.module.css";
-import DishListItem from "./dishListItem/DishListItem";
+import DishListItemContainer from "./dishListItem/DishListItemContainer";
 
-export default function Dishes({ dishes }) {
+export default function Dishes({ dishesIds }) {
   return (
     <ul className={styles["menu-list"]}>
-      {dishes.map((dish) => {
-        const { id, name } = dish || {};
-
-        return id && name ? (
-          <DishListItem key={id} id={id} name={name} />
-        ) : null;
-      })}
+      {dishesIds.map((dishId) => (
+        <DishListItemContainer key={dishId} dishId={dishId} />
+      ))}
     </ul>
   );
 }

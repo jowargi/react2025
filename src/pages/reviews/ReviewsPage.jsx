@@ -4,18 +4,17 @@ import { useSelector } from "react-redux";
 import Reviews from "../../components/restaurants/restaurantView/restaurant/reviews/Reviews";
 import styles from "./ReviewsPage.module.css";
 import classNames from "classnames";
-import { useRequest } from "../../redux/hooks/useRequest";
-import { getReviewsByRestaurantId } from "../../redux/features/restaurantReviews/getReviewsByRestaurantId";
-import {
-  selectReviewsByRestaurantId,
-  selectReviewsErrorByRestaurantId,
-} from "../../redux/features/restaurantReviews/slice";
 import {
   REQUEST_STATUS_IDLE,
   REQUEST_STATUS_PENDING,
+  REQUEST_STATUS_REJECTED,
 } from "../../redux/constants";
 import ReviewsPageSkeleton from "../../components/skeletons/reviewsPage/ReviewsPageSkeleton";
 import ErrorAlert from "../../components/errorAlert/ErrorAlert";
+import { useRequest } from "../../redux/hooks/useRequest";
+import { getReviewsByRestaurantId } from "../../redux/features/reviews/getReviewsByRestaurantId";
+import { selectRestaurantById } from "../../redux/features/restaurants/slice";
+import { selectRestaurantReviewsError } from "../../redux/features/reviews/slice";
 
 export default function ReviewsPage() {
   const { themeColor } = useThemeColor();
@@ -23,11 +22,11 @@ export default function ReviewsPage() {
 
   const requestStatus = useRequest(getReviewsByRestaurantId, restaurantId);
 
-  const reviews = useSelector((state) =>
-    selectReviewsByRestaurantId(state, restaurantId)
+  const restaurant = useSelector((state) =>
+    selectRestaurantById(state, restaurantId)
   );
-  const reviewsError = useSelector((state) =>
-    selectReviewsErrorByRestaurantId(state, restaurantId)
+  const restaurantReviewsError = useSelector((state) =>
+    selectRestaurantReviewsError(state, restaurantId)
   );
 
   if (requestStatus === REQUEST_STATUS_IDLE) return null;
@@ -35,18 +34,23 @@ export default function ReviewsPage() {
   if (requestStatus === REQUEST_STATUS_PENDING) return <ReviewsPageSkeleton />;
 
   if (
-    requestStatus === REQUEST_STATUS_PENDING &&
-    reviewsError?.name !== "ConditionError"
+    requestStatus === REQUEST_STATUS_REJECTED &&
+    restaurantReviewsError?.name !== "ConditionError"
   )
     return (
-      <ErrorAlert name={reviewsError.name} message={reviewsError.message} />
+      <ErrorAlert
+        name={restaurantReviewsError.name}
+        message={restaurantReviewsError.message}
+      />
     );
+
+  const { reviews: reviewsIds } = restaurant || {};
 
   return (
     <div className={styles["reviews-section"]}>
       <h3>Reviews</h3>
-      {reviews?.length ? (
-        <Reviews reviews={reviews} />
+      {reviewsIds?.length ? (
+        <Reviews reviewsIds={reviewsIds} />
       ) : (
         <>
           <p

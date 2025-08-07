@@ -1,16 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import HttpError from "../../../errors/HttpError";
-import { selectReviewsByRestaurantId } from "./slice";
+import { selectRestaurantById } from "../restaurants/slice";
+import { selectReviewsIds } from "./slice";
 
 export const getReviewsByRestaurantId = createAsyncThunk(
-  "restaurantReview/getReviewsByRestaurantId",
+  "reviews/getReviewsByRestaurantId",
 
   async (restaurantId, { rejectWithValue, signal }) => {
     const response = await fetch(
       `http://localhost:3001/api/reviews?restaurantId=${restaurantId}`,
-      {
-        signal,
-      }
+      { signal }
     );
 
     if (!response.ok) return rejectWithValue(new HttpError(response.status));
@@ -23,8 +22,17 @@ export const getReviewsByRestaurantId = createAsyncThunk(
   },
 
   {
-    condition: (restaurantId, { getState }) =>
-      !selectReviewsByRestaurantId(getState(), restaurantId)?.length,
+    condition: (restaurantId, { getState }) => {
+      const restaurant = selectRestaurantById(getState(), restaurantId);
+
+      const feedback = restaurant?.reviews;
+
+      if (!feedback?.length) return true;
+
+      const reviewsIds = selectReviewsIds(getState());
+
+      return !!feedback.find((reviewId) => !reviewsIds.includes(reviewId));
+    },
     dispatchConditionRejection: true,
   }
 );
