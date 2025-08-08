@@ -1,0 +1,111 @@
+.dish-skeleton {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-skeleton--theme-color-light {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+.dish-skeleton--theme-color-dark {
+  background-color: #3a3a3a;
+  border: 1px solid #444;
+}
+
+.name-skeleton {
+  width: 70%;
+  height: 32px;
+  margin-bottom: 16px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.price-skeleton {
+  width: 120px;
+  height: 24px;
+  margin-bottom: 24px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.ingredients-skeleton {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 24px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.counter-skeleton {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.counter-button-skeleton {
+  width: 36px;
+  height: 36px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.count-skeleton {
+  width: 24px;
+  height: 24px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.link-skeleton {
+  width: 160px;
+  height: 40px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+}
+
+.dish-skeleton--theme-color-dark .name-skeleton,
+.dish-skeleton--theme-color-dark .price-skeleton,
+.dish-skeleton--theme-color-dark .ingredients-skeleton,
+.dish-skeleton--theme-color-dark .counter-button-skeleton,
+.dish-skeleton--theme-color-dark .count-skeleton,
+.dish-skeleton--theme-color-dark .link-skeleton {
+  background-color: #3d3d3d;
+}
+
+@media (max-width: 480px) {
+  .dish-skeleton {
+    padding: 1rem;
+  }
+
+  .name-skeleton {
+    height: 28px;
+  }
+
+  .price-skeleton {
+    height: 20px;
+    margin-bottom: 20px;
+  }
+
+  .ingredients-skeleton {
+    height: 50px;
+    margin-bottom: 20px;
+  }
+
+  .counter-skeleton {
+    gap: 12px;
+  }
+
+  .counter-button-skeleton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .link-skeleton {
+    width: 100%;
+    height: 36px;
+  }
+}
