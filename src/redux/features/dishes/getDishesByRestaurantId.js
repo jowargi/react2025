@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import HttpError from "../../../errors/HttpError";
-import { selectRestaurantById } from "../restaurants/slice";
 import { selectDishesIds } from "./slice";
+import { selectRestaurantById } from "../../services/restaurants/api";
 
 export const getDishesByRestaurantId = createAsyncThunk(
   "dishes/getDishesByRestaurantId",

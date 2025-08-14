@@ -1,32 +1,27 @@
-import { useReviewForm } from "./useReviewForm/useReviewForm";
+import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
 import InputField from "./inputField/InputField";
 import TextareaField from "./textareaField/TextareaField";
 import RatingCounter from "./ratingCounter/RatingCounter";
 import FormControls from "./formControls/FormControls";
 import styles from "./ReviewForm.module.css";
 import classNames from "classnames";
-import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
-import { useUser } from "../../../../userContextProvider/UserContextProvider";
 
-export default function ReviewForm() {
-  const {
-    formState,
-    setName,
-    setEmail,
-    setReview,
-    decrementRating,
-    incrementRating,
-    clear,
-  } = useReviewForm();
-
-  const { user } = useUser();
+export default function ReviewForm({
+  formState,
+  setName,
+  setEmail,
+  setReview,
+  decrementRating,
+  incrementRating,
+  onSubmit,
+  onClear,
+  isDisabled,
+}) {
   const { themeColor } = useThemeColor();
-
-  if (!user) return null;
 
   return (
     <form
-      onSubmit={(event) => event.preventDefault()}
+      onSubmit={onSubmit}
       className={classNames(
         styles.form,
         styles[`form--theme-color-${themeColor}`]
@@ -60,7 +55,7 @@ export default function ReviewForm() {
         decrementRating={decrementRating}
         incrementRating={incrementRating}
       />
-      <FormControls onClear={clear} onSubmit={() => null} />
+      <FormControls onClear={onClear} isDisabled={isDisabled} />
     </form>
   );
 }

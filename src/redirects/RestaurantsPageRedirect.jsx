@@ -1,39 +1,27 @@
-import { useSelector } from "react-redux";
-import {
-  selectRestaurantsError,
-  selectRestaurantsIds,
-} from "../redux/features/restaurants/slice";
 import { Navigate, Outlet, useParams } from "react-router-dom";
-import { useRequest } from "../redux/hooks/useRequest";
-import { getRestaurants } from "../redux/features/restaurants/getRestaurants";
-import {
-  REQUEST_STATUS_IDLE,
-  REQUEST_STATUS_PENDING,
-  REQUEST_STATUS_REJECTED,
-} from "../redux/constants";
 import RestaurantsPageSkeleton from "../components/skeletons/restaurantsPage/RestaurantsPageSkeleton";
 import ErrorAlert from "../components/errorAlert/ErrorAlert";
+import { useGetRestaurantsQuery } from "../redux/services/restaurants/api";
 
 export default function RestaurantsPageRedirect() {
   const { restaurantId } = useParams();
 
-  const requestStatus = useRequest(getRestaurants);
+  const {
+    data: restaurantsIds,
+    error,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.map((restaurant) => restaurant.id),
+    }),
+  });
 
-  const restaurantsIds = useSelector(selectRestaurantsIds);
-  const restaurantsError = useSelector(selectRestaurantsError);
+  if (isLoading || isFetching) return <RestaurantsPageSkeleton />;
 
-  if (requestStatus === REQUEST_STATUS_IDLE) return null;
-
-  if (requestStatus === REQUEST_STATUS_PENDING)
-    return <RestaurantsPageSkeleton />;
-
-  if (
-    requestStatus === REQUEST_STATUS_REJECTED &&
-    restaurantsError?.name !== "ConditionError"
-  )
-    return (
-      <ErrorAlert name={restaurantsError.name} message={restaurantsError.message} />
-    );
+  if (isError) return <ErrorAlert name={error.status} message={error.error} />;
 
   if (restaurantId) return <Outlet />;
 

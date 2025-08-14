@@ -1,5 +1,4 @@
 export const userMock = {
-  id: 1,
-  name: "Alex Smith",
-  email: "alex.smith@example.com",
+  id: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
+  name: "Sam",
 };

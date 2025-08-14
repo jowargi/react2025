@@ -2,7 +2,7 @@ import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeCol
 import styles from "./FormControls.module.css";
 import classNames from "classnames";
 
-export default function FormControls({ onClear, onSubmit }) {
+export default function FormControls({ onClear, isDisabled }) {
   const { themeColor } = useThemeColor();
 
   return (
@@ -16,6 +16,7 @@ export default function FormControls({ onClear, onSubmit }) {
         type="button"
         value="Clear"
         onClick={onClear}
+        disabled={isDisabled}
         className={classNames(
           styles.button,
           styles[`button--theme-color-${themeColor}`]
@@ -24,7 +25,7 @@ export default function FormControls({ onClear, onSubmit }) {
       <input
         type="submit"
         value="Submit"
-        onClick={onSubmit}
+        disabled={isDisabled}
         className={classNames(
           styles.button,
           styles["button--submit"],

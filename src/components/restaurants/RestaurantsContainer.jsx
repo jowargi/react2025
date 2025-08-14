@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux";
+import { useGetRestaurantsQuery } from "../../redux/services/restaurants/api";
 import Restaurants from "./Restaurants";
-import { selectRestaurantsIds } from "../../redux/features/restaurants/slice";
 
 export default function RestaurantsContainer() {
-  const restaurantsIds = useSelector(selectRestaurantsIds);
+  const { data: restaurantsIds } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.map((restaurant) => restaurant.id),
+    }),
+  });
 
   return restaurantsIds?.length ? (
     <Restaurants restaurantsIds={restaurantsIds} />
