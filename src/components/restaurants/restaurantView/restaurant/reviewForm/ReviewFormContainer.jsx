@@ -8,15 +8,8 @@ import { useEffect, useRef } from "react";
 import ReviewForm from "./ReviewForm";
 
 export default function ReviewFormContainer() {
-  const {
-    formState,
-    setName,
-    setEmail,
-    setReview,
-    decrementRating,
-    incrementRating,
-    clear,
-  } = useReviewForm();
+  const { formState, setText, decrementRating, incrementRating, clear } =
+    useReviewForm();
 
   const [addReviewByRestaurantId, { error, isLoading, isError, reset }] =
     useAddReviewByRestaurantIdMutation({
@@ -44,12 +37,12 @@ export default function ReviewFormContainer() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    if (!formState.review.trim()) return;
+    if (!formState.text.trim()) return;
 
     try {
       await addReviewByRestaurantId({
         restaurantId,
-        review: { userId, text: formState.review, rating: +formState.rating },
+        review: { userId, ...formState },
       }).unwrap();
 
       clear();
@@ -64,9 +57,7 @@ export default function ReviewFormContainer() {
   return (
     <ReviewForm
       formState={formState}
-      setName={setName}
-      setEmail={setEmail}
-      setReview={setReview}
+      setText={setText}
       decrementRating={decrementRating}
       incrementRating={incrementRating}
       onSubmit={onSubmit}

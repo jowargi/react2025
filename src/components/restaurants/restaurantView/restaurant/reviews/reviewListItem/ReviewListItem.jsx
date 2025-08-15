@@ -4,10 +4,8 @@ import { useThemeColor } from "../../../../../themeColorContextProvider/ThemeCol
 import UserContainer from "./user/UserContainer";
 import { useUser } from "../../../../../userContextProvider/UserContextProvider";
 import { useEditMode } from "./useEditMode";
-import InputField from "../../reviewForm/inputField/InputField";
-import RatingCounter from "../../reviewForm/ratingCounter/RatingCounter";
-import FormControls from "../../reviewForm/formControls/FormControls";
 import { useCallback } from "react";
+import ReviewForm from "../../reviewForm/ReviewForm";
 
 export default function ReviewListItem({
   userId,
@@ -39,28 +37,15 @@ export default function ReviewListItem({
     >
       <UserContainer userId={userId} />
       {user?.id === userId && isEditing ? (
-        <form
+        <ReviewForm
+          formState={formState}
+          setText={setText}
+          decrementRating={decrementRating}
+          incrementRating={incrementRating}
           onSubmit={onSubmit}
-          className={classNames(
-            styles.form,
-            styles[`form--theme-color-${themeColor}`]
-          )}
-        >
-          <InputField
-            type="text"
-            id="review-editing-text"
-            name="text"
-            value={formState.text}
-            onChange={(event) => setText(event.target.value)}
-            labelText="Edit review text"
-          />
-          <RatingCounter
-            rating={formState.rating}
-            decrementRating={decrementRating}
-            incrementRating={incrementRating}
-          />
-          <FormControls onClear={onClear} isDisabled={isDisabled} />
-        </form>
+          onClear={onClear}
+          isDisabled={isDisabled}
+        />
       ) : (
         <p
           className={classNames(
