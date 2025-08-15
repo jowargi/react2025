@@ -1,4 +1,4 @@
-import ReviewForm from "./reviewForm/ReviewForm";
+import ReviewFormContainer from "./reviewForm/ReviewFormContainer";
 import styles from "./Restaurant.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
@@ -27,7 +27,7 @@ export default function Restaurant({ name }) {
       </h2>
       <RestaurantNavigation />
       <Outlet />
-      {user && <ReviewForm />}
+      {user && <ReviewFormContainer />}
     </div>
   );
 }

@@ -1,33 +1,20 @@
 import { useCallback, useReducer } from "react";
-import { useUser } from "../../../../../userContextProvider/UserContextProvider";
+import { useUser } from "../../../../userContextProvider/UserContextProvider";
 
 const INITIAL_FORM_STATE = {
-  name: "",
-  email: "",
-  review: "",
+  text: "",
   rating: 1,
 };
 
-const SET_NAME_ACTION = "setName";
-const SET_EMAIL_ACTION = "setEmail";
-const SET_REVIEW_ACTION = "setReview";
+const SET_TEXT_ACTION = "setText";
 const DECREMENT_RATING_ACTION = "decrementRating";
 const INCREMENT_RATING_ACTION = "incrementRating";
 const CLEAR_ACTION = "clear";
 
 const reducer = (formState, action) => {
   switch (action.type) {
-    case SET_NAME_ACTION:
-      return {
-        ...INITIAL_FORM_STATE,
-        name: action.payload,
-      };
-
-    case SET_EMAIL_ACTION:
-      return { ...formState, email: action.payload };
-
-    case SET_REVIEW_ACTION:
-      return { ...formState, review: action.payload };
+    case SET_TEXT_ACTION:
+      return { ...formState, text: action.payload };
 
     case DECREMENT_RATING_ACTION:
       return { ...formState, rating: Math.max(formState.rating - 1, 1) };
@@ -56,18 +43,8 @@ export function useReviewForm() {
     [user, dispatch]
   );
 
-  const setName = useCallback(
-    (name) => safeDispatch({ type: SET_NAME_ACTION, payload: name }),
-    [safeDispatch]
-  );
-
-  const setEmail = useCallback(
-    (email) => safeDispatch({ type: SET_EMAIL_ACTION, payload: email }),
-    [safeDispatch]
-  );
-
-  const setReview = useCallback(
-    (review) => safeDispatch({ type: SET_REVIEW_ACTION, payload: review }),
+  const setText = useCallback(
+    (text) => safeDispatch({ type: SET_TEXT_ACTION, payload: text }),
     [safeDispatch]
   );
 
@@ -88,9 +65,7 @@ export function useReviewForm() {
 
   return {
     formState,
-    setName,
-    setEmail,
-    setReview,
+    setText,
     decrementRating,
     incrementRating,
     clear,

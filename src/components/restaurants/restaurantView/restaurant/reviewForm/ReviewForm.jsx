@@ -1,58 +1,34 @@
-import { useReviewForm } from "./useReviewForm/useReviewForm";
-import InputField from "./inputField/InputField";
+import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
 import TextareaField from "./textareaField/TextareaField";
 import RatingCounter from "./ratingCounter/RatingCounter";
 import FormControls from "./formControls/FormControls";
 import styles from "./ReviewForm.module.css";
 import classNames from "classnames";
-import { useThemeColor } from "../../../../themeColorContextProvider/ThemeColorContextProvider";
-import { useUser } from "../../../../userContextProvider/UserContextProvider";
 
-export default function ReviewForm() {
-  const {
-    formState,
-    setName,
-    setEmail,
-    setReview,
-    decrementRating,
-    incrementRating,
-    clear,
-  } = useReviewForm();
-
-  const { user } = useUser();
+export default function ReviewForm({
+  formState,
+  setText,
+  decrementRating,
+  incrementRating,
+  onSubmit,
+  onClear,
+  isDisabled,
+}) {
   const { themeColor } = useThemeColor();
-
-  if (!user) return null;
 
   return (
     <form
-      onSubmit={(event) => event.preventDefault()}
+      onSubmit={onSubmit}
       className={classNames(
         styles.form,
         styles[`form--theme-color-${themeColor}`]
       )}
     >
-      <InputField
-        type="text"
-        id="name-input"
-        name="name"
-        value={formState.name}
-        onChange={(event) => setName(event.target.value)}
-        labelText="Name"
-      />
-      <InputField
-        type="email"
-        id="email-input"
-        name="email"
-        value={formState.email}
-        onChange={(event) => setEmail(event.target.value)}
-        labelText="Email"
-      />
       <TextareaField
         id="review-text"
         name="review"
-        value={formState.review}
-        onChange={(event) => setReview(event.target.value)}
+        value={formState.text}
+        onChange={(event) => setText(event.target.value)}
         labelText="Review"
       />
       <RatingCounter
@@ -60,7 +36,7 @@ export default function ReviewForm() {
         decrementRating={decrementRating}
         incrementRating={incrementRating}
       />
-      <FormControls onClear={clear} onSubmit={() => null} />
+      <FormControls onClear={onClear} isDisabled={isDisabled} />
     </form>
   );
 }

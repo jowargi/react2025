@@ -7,6 +7,7 @@ export default function CounterButton({ text, onClick }) {
 
   return (
     <button
+      type="button"
       onClick={onClick}
       className={classNames(
         styles.button,

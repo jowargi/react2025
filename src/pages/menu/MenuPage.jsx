@@ -11,10 +11,10 @@ import {
 } from "../../redux/constants";
 import MenuPageSkeleton from "../../components/skeletons/menuPage/MenuPageSkeleton";
 import ErrorAlert from "../../components/errorAlert/ErrorAlert";
-import { selectRestaurantById } from "../../redux/features/restaurants/slice";
 import { useRequest } from "../../redux/hooks/useRequest";
 import { getDishesByRestaurantId } from "../../redux/features/dishes/getDishesByRestaurantId";
 import { selectRestaurantDishesError } from "../../redux/features/dishes/slice";
+import { useGetRestaurantsQuery } from "../../redux/services/restaurants/api";
 
 export default function MenuPage() {
   const { themeColor } = useThemeColor();
@@ -22,9 +22,13 @@ export default function MenuPage() {
 
   const requestStatus = useRequest(getDishesByRestaurantId, restaurantId);
 
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId)
-  );
+  const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.find((restaurant) => restaurant.id === restaurantId),
+    }),
+  });
+
   const restaurantDishesError = useSelector((state) =>
     selectRestaurantDishesError(state, restaurantId)
   );

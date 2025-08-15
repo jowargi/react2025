@@ -1,11 +1,13 @@
-import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../../../../redux/features/restaurants/slice";
+import { useGetRestaurantsQuery } from "../../../../../redux/services/restaurants/api";
 import RestaurantTab from "./RestaurantTab";
 
 export default function RestaurantTabContainer({ restaurantId }) {
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId)
-  );
+  const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.find((restaurant) => restaurant.id === restaurantId),
+    }),
+  });
 
   const { name } = restaurant || {};
 
