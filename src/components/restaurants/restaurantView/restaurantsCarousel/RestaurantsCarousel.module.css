@@ -1,0 +1,75 @@
+.carousel {
+  width: 100%;
+  scrollbar-width: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow: auto;
+  width: 100%;
+  padding: 1rem;
+}
+
+.item {
+  flex: 0 0 auto;
+}
+
+.item img {
+  display: block;
+  width: auto;
+  height: 20rem;
+  border-radius: 8px;
+}
+
+.item img:hover {
+  outline-width: 2px;
+  outline-style: dashed;
+  outline-offset: 2px;
+}
+
+.item--theme-color-light img:hover {
+  outline-color: #3a86ff;
+}
+
+.item--theme-color-dark img:hover {
+  outline-color: #bb86fc;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 3000;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.tooltip--theme-color-light {
+  background-color: #3a86ff;
+}
+
+.tooltip--theme-color-dark {
+  background-color: #bb86fc;
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    height: 20rem;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .item {
+    flex: 0 0 auto;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+  }
+}
