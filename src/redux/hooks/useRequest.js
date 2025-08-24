@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatus } from "../features/requests/slice";
+import { deleteRequest, selectStatus } from "../features/requests/slice";
 
 export const useRequest = (thunk, payload) => {
   const [request, setRequest] = useState(null);
@@ -20,6 +20,8 @@ export const useRequest = (thunk, payload) => {
       request.abort();
 
       setRequest(null);
+
+      dispatch(deleteRequest(request.requestId));
     };
   }, [thunk, payload, dispatch]);
 

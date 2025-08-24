@@ -1,4 +1,4 @@
-import RestaurantView from "./restaurantView/RestaurantView";
+import RestaurantViewContainer from "./restaurantView/RestaurantViewContainer";
 import styles from "./Restaurants.module.css";
 import classNames from "classnames";
 import { useThemeColor } from "../themeColorContextProvider/ThemeColorContextProvider";
@@ -28,7 +28,7 @@ export default function Restaurants({ title = "Restaurants", restaurantsIds }) {
         )}
       >
         {restaurantsIds?.length ? (
-          <RestaurantView restaurantsIds={restaurantsIds} />
+          <RestaurantViewContainer restaurantsIds={restaurantsIds} />
         ) : (
           <p
             className={classNames(

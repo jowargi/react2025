@@ -10,6 +10,12 @@ export const requestsSlice = createSlice({
   name: "requests",
   initialState: {},
 
+  reducers: {
+    deleteRequest: (state, { payload }) => {
+      if (state[payload]) delete state[payload];
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -38,4 +44,5 @@ export const requestsSlice = createSlice({
   },
 });
 
+export const { deleteRequest } = requestsSlice.actions;
 export const { selectStatus, selectIsLoading } = requestsSlice.selectors;
