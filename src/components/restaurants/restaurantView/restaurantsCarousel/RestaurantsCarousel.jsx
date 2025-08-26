@@ -1,16 +1,26 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useThemeColor } from "../../../themeColorContextProvider/ThemeColorContextProvider";
 import styles from "./RestaurantsCarousel.module.css";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 
+const partialBind = (func, ...boundArgs) => {
+  return function (...args) {
+    return func.call(this, ...boundArgs, ...args);
+  };
+};
+
 export default function RestaurantsCarousel({ restaurantsWithImage }) {
   const { themeColor } = useThemeColor();
 
-  const restaurantsWithImageUrl = restaurantsWithImage.map((restaurant) => ({
-    ...restaurant,
-    img: URL.createObjectURL(restaurant.img),
-  }));
+  const restaurantsWithImageUrl = useMemo(
+    () =>
+      restaurantsWithImage.map((restaurant) => ({
+        ...restaurant,
+        img: URL.createObjectURL(restaurant.img),
+      })),
+    [restaurantsWithImage]
+  );
 
   useEffect(
     () => () =>
@@ -26,6 +36,7 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
     () => () => {
       if (tooltipRef.current) {
         tooltipRef.current.remove();
+
         tooltipRef.current = null;
       }
     },
@@ -35,16 +46,8 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
   const navigate = useNavigate();
 
   const selectRestaurant = useCallback(
-    (event) => {
+    (restaurantId, event) => {
       event.preventDefault();
-
-      const restaurantIdHost = event.target.closest("[data-restaurant-id]");
-
-      if (!restaurantIdHost) return;
-
-      const restaurantId = restaurantIdHost.dataset.restaurantId;
-
-      if (!restaurantId) return;
 
       navigate(`/restaurants/${restaurantId}`);
     },
@@ -54,25 +57,22 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
   const moveTooltip = useCallback((event) => {
     event.preventDefault();
 
-    const tooltipHost = event.target.closest("[data-tooltip]");
-
-    if (!tooltipHost) return;
-
     if (!tooltipRef.current) return;
 
-    tooltipRef.current.style.left = event.clientX + 5 + "px";
-    tooltipRef.current.style.top = event.clientY + 5 + "px";
+    const item = event.currentTarget;
+    const itemRect = item.getBoundingClientRect();
+    const tooltipLeft = event.clientX - itemRect.left - item.clientLeft;
+    const tooltipTop = event.clientY - itemRect.top - item.clientTop;
+
+    tooltipRef.current.style.left = tooltipLeft + 10 + "px";
+    tooltipRef.current.style.top = tooltipTop + 10 + "px";
   }, []);
 
   const addTooltip = useCallback(
-    (event) => {
-      event.preventDefault();
-
-      const tooltipText = event.currentTarget.dataset.tooltip;
-
-      if (!tooltipText) return;
-
+    (tooltipText, event) => {
       if (tooltipRef.current) return;
+
+      const item = event.currentTarget;
 
       tooltipRef.current = document.createElement("div");
 
@@ -83,18 +83,12 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
 
       tooltipRef.current.innerHTML = tooltipText;
 
-      document.body.append(tooltipRef.current);
+      item.append(tooltipRef.current);
     },
     [themeColor]
   );
 
-  const removeTooltip = useCallback((event) => {
-    event.preventDefault();
-
-    const tooltipHost = event.currentTarget;
-
-    if (!tooltipHost.dataset.tooltip) return;
-
+  const removeTooltip = useCallback(() => {
     if (!tooltipRef.current) return;
 
     tooltipRef.current.remove();
@@ -105,9 +99,7 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
   const cancelTooltip = useCallback((event) => {
     event.preventDefault();
 
-    const isTooltipRelated = !!event.target.closest("[data-tooltip]");
-
-    if (!isTooltipRelated || !tooltipRef.current) return;
+    if (!tooltipRef.current) return;
 
     tooltipRef.current.remove();
 
@@ -115,12 +107,7 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
   }, []);
 
   return (
-    <div
-      id="carousel"
-      className={styles.carousel}
-      onClick={selectRestaurant}
-      onPointerMove={moveTooltip}
-    >
+    <div id="carousel" className={styles.carousel}>
       <ul className={styles.container}>
         {restaurantsWithImageUrl.map((restaurant) => (
           <li
@@ -129,15 +116,15 @@ export default function RestaurantsCarousel({ restaurantsWithImage }) {
               styles.item,
               styles[`item--theme-color-${themeColor}`]
             )}
+            onPointerEnter={partialBind(addTooltip, restaurant.name)}
+            onPointerLeave={removeTooltip}
+            onPointerMove={moveTooltip}
+            onPointerCancel={cancelTooltip}
+            onClick={partialBind(selectRestaurant, restaurant.id)}
           >
             <img
               src={restaurant.img}
-              onDragStart={(event) => event.preventDefault}
-              onPointerOver={addTooltip}
-              onPointerOut={removeTooltip}
-              onPointerCancel={cancelTooltip}
-              data-restaurant-id={restaurant.id}
-              data-tooltip={restaurant.name}
+              onDragStart={(event) => event.preventDefault()}
             />
           </li>
         ))}

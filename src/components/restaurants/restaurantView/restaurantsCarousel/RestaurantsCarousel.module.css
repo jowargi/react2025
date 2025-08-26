@@ -13,6 +13,7 @@
 }
 
 .item {
+  position: relative;
   flex: 0 0 auto;
 }
 
@@ -38,11 +39,12 @@
 }
 
 .tooltip {
-  position: fixed;
+  position: absolute;
   z-index: 3000;
   padding: 0.5rem;
   border-radius: 8px;
   color: white;
+  white-space: nowrap;
 }
 
 .tooltip--theme-color-light {

@@ -29,7 +29,7 @@ export default function RestaurantTab({ id, name }) {
     (event) => {
       if (!isPopupHiddenRef.current) return;
 
-      const tab = event.target;
+      const tab = event.currentTarget;
 
       if (tab.classList.contains(styles["tab--disabled"])) return;
 
