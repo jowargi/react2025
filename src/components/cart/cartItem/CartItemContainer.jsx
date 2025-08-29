@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectDishById } from "../../../redux/features/dishes/slice";
+import { selectDishById } from "../../../redux/services/dishes/api";
 import { selectAmountByItemId } from "../../../redux/features/cart/slice";
 import CartItem from "./CartItem";
 
