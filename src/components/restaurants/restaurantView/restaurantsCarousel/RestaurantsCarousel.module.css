@@ -24,12 +24,6 @@
   border-radius: 8px;
 }
 
-.item img:hover {
-  outline-width: 2px;
-  outline-style: dashed;
-  outline-offset: 2px;
-}
-
 .item--theme-color-light img:hover {
   outline-color: #3a86ff;
 }
@@ -45,6 +39,7 @@
   border-radius: 8px;
   color: white;
   white-space: nowrap;
+  font-size: 12px;
 }
 
 .tooltip--theme-color-light {
