@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
-import { selectDishById } from "../../redux/features/dishes/slice";
 import Dish from "./Dish";
+import { useGetDishByIdQuery } from "../../redux/services/dishes/api";
 
 export default function DishContainer({ id }) {
-  const dish = useSelector((state) => selectDishById(state, id));
+  const { data: dish } = useGetDishByIdQuery(id);
 
   const { name, price, ingredients } = dish || {};
 

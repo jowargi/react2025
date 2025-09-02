@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
-import { selectDishById } from "../../../../../../redux/features/dishes/slice";
 import DishListItem from "./DishListItem";
+import { useGetDishesByRestaurantIdQuery } from "../../../../../../redux/services/dishes/api";
+import { useParams } from "react-router-dom";
 
 export default function DishListItemContainer({ dishId }) {
-  const dish = useSelector((state) => selectDishById(state, dishId));
+  const { restaurantId } = useParams();
+
+  const { data: dish } = useGetDishesByRestaurantIdQuery(restaurantId, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.find((dish) => dish.id === dishId),
+    }),
+  });
 
   const { name } = dish || {};
 
